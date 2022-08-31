@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->dateTime('check_in');
-            $table->dateTime('check_out');
+            $table->dateTime('check_in')->default(now());
+            $table->dateTime('check_out')->default(null);
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });

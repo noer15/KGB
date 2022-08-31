@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Criteria extends Model
 {
     use HasFactory;
+    protected $fillable = ['name','increase'];
+    protected $hidden = ['created_at', 'updated_at'];
 }
