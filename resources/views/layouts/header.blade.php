@@ -8,13 +8,13 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item px-2 active">
-                <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item px-2">
-                <a class="nav-link" href="#">Position</a>
+                    <a class="nav-link" href="{{ url('position') }}">Position</a>
                 </li>
                 <li class="nav-item px-2">
-                <a class="nav-link" href="#">Salary</a>
+                    <a class="nav-link" href="{{ url('salary') }}">Salary</a>
                 </li>
                 <li class="nav-item px-2">
                     <a class="nav-link" href="#">User</a>

@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\CriteriaController;
+use App\Http\Controllers\Admin\PositionController;
+use App\Http\Controllers\Admin\SalaryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +24,10 @@ Route::get('/', function () {
 Route::get('/auth/login', function() {
     return view('/auth.login');
 })->name('login');
+
+Route::resource('/position', PositionController::class);
+Route::resource('/criteria', CriteriaController::class);
+Route::resource('/salary', SalaryController::class);
+Route::resource('/attendance', AttendanceController::class);
+
+

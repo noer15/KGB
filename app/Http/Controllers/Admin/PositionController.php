@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Position;
+use Error;
 use Illuminate\Http\Request;
 
 class PositionController extends Controller
@@ -14,7 +16,8 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        $positions = Position::with('salary')->get();
+        return view('position.index', compact('positions'));
     }
 
     /**
@@ -35,7 +38,12 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            Position::create($request->all());
+            return back(); 
+        } catch (\Exception $e) {
+            new Error($e);
+        }
     }
 
     /**
@@ -57,7 +65,12 @@ class PositionController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $contact = Position::findOrFail($id);
+            return ['status' => true, 'kode' => 1, 'data' => $contact, 'pesan' => 'Data Ditemukan'];
+        } catch (\Exception $e) {
+            return ['status' => false, 'kode' => 2, 'pesan' => 'Data Tidak Ditemukan'];
+        }
     }
 
     /**
@@ -69,7 +82,14 @@ class PositionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $positions = Position::find($id);
+        $data = $request->all();
+        try {
+            $positions->update($data);
+            return back();
+        } catch (\Exception $e) {
+            return back();
+        }
     }
 
     /**
@@ -80,6 +100,12 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $positions = Position::find($id);
+        try {
+            $positions->delete();
+            return back();
+        } catch (\Exception $e) {
+            return back();
+        }
     }
 }
