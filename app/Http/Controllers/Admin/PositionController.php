@@ -66,8 +66,8 @@ class PositionController extends Controller
     public function edit($id)
     {
         try {
-            $contact = Position::findOrFail($id);
-            return ['status' => true, 'kode' => 1, 'data' => $contact, 'pesan' => 'Data Ditemukan'];
+            $position = Position::findOrFail($id);
+            return ['status' => true, 'kode' => 1, 'data' => $position, 'pesan' => 'Data Ditemukan'];
         } catch (\Exception $e) {
             return ['status' => false, 'kode' => 2, 'pesan' => 'Data Tidak Ditemukan'];
         }
@@ -100,9 +100,9 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        $positions = Position::find($id);
+        $position = Position::find($id);
         try {
-            $positions->delete();
+            $position->delete();
             return back();
         } catch (\Exception $e) {
             return back();

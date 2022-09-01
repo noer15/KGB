@@ -12,12 +12,11 @@ class AuthController extends Controller
 {
     public function index()
     {
-        return 'login page';
+        return view('/auth.login');
     }
 
     public function login(Request $request)
     {
-
         $validator = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -25,10 +24,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($validator, true)) {
             $request->session()->regenerate();
-            return redirect()->intended('home');
+            return redirect()->intended('/');
         }
 
-        return 'login page';
+        return redirect()->route('login');
     }
 
     public function register(Request $request)
