@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Salary;
 use Illuminate\Http\Request;
 
 class SalaryController extends Controller
@@ -14,7 +15,8 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        //
+        $salary = Salary::all();
+        return view('salary.index', compact('salary'));
     }
 
     /**
@@ -35,7 +37,12 @@ class SalaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            Salary::create($request->all());
+            return back(); 
+        } catch (\Exception $e) {
+            new Error($e);
+        }
     }
 
     /**

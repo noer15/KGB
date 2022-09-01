@@ -3,7 +3,7 @@
     <section>
         <div class="d-flex justify-content-between">
             <div>
-                <h3>Position</h3>
+                <h3>Gaji</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, natus.</p>
             </div>
         </div>
@@ -11,7 +11,7 @@
             <div class="d-flex justify-content-between">
                 <div>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Tambah Jabatan
+                        Tambah Gaji
                     </button>
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -23,20 +23,11 @@
                               </button>
                             </div>
                             <div class="modal-body">
-                                <form action="/position" method="POST">
+                                <form action="/salary" method="POST">
                                     @csrf
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Gaji</label>
-                                      <select name="salary_id" id="" class="form-control">
-                                        <option value="0">--Pilih Gaji--</option>
-                                        @foreach (App\Models\Salary::all() as $item)
-                                            <option value="{{ $item->id }}">{{ $item->salary }}</option>
-                                        @endforeach
-                                      </select>
-                                    </div>
                                     <div class="form-group py-2">
-                                      <label for="exampleInputPassword1">Nama Jabatan</label>
-                                      <input type="text" class="form-control" name="name" id="exampleInputPassword1" placeholder="Nama Jabatan">
+                                      <label for="exampleInputPassword1">Nominal Gaji</label>
+                                      <input type="number" class="form-control" name="salary" id="exampleInputPassword1" placeholder="Nama Jabatan">
                                     </div>
                                     <div class="my-4">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -63,16 +54,14 @@
                         <tr>
                             <th>No</th>
                             <th>Gaji</th>
-                            <th>Jabatan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($positions as $key => $position)    
+                        @foreach ($salary as $key => $gaji)    
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>Rp. {{ number_format($position->salary->salary,0,'.','.') }}</td>
-                            <td>{{ $position->name }}</td>
+                            <td>Rp. {{ number_format($gaji->salary,0,'.','.') }}</td>
                             <td>
                                 <a href="">Edit</a>
                                 <a href="">Hapus</a>
