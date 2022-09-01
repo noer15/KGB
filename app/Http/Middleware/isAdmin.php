@@ -17,10 +17,10 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user() && Auth::user()->level = 'admin'){
+        if(Auth::check() && Auth::user()->level = 'admin'){
             return $next($request);
         }
 
-        return route('login');
+        return redirect(route('login'));
     }
 }

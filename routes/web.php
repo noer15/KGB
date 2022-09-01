@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\CriteriaController;
 use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\SalaryController;
+use App\Http\Controllers\Guest\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,13 +22,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('/home');
 });
-Route::get('/auth/login', function() {
-    return view('/auth.login');
-})->name('login');
 
-Route::resource('/position', PositionController::class);
-Route::resource('/criteria', CriteriaController::class);
-Route::resource('/salary', SalaryController::class);
-Route::resource('/attendance', AttendanceController::class);
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/post', [AuthController::class, 'login'])->name('login.post');
 
-
+Route::resource('/position', PositionController::class)->middleware('admin');
+Route::resource('/criteria', CriteriaController::class)->middleware('admin');
+Route::resource('/salary', SalaryController::class)->middleware('admin');
+Route::resource('/attendance', AttendanceController::class)->middleware('admin');
