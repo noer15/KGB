@@ -10,18 +10,20 @@
                 <li class="nav-item px-2 active">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link" href="{{ url('position') }}">Position</a>
-                </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link" href="{{ url('salary') }}">Salary</a>
-                </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link" href="#">User</a>
-                </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link" href="#">Report</a>
-                </li>
+                @if (auth()->user()->level == 'admin')
+                    <li class="nav-item px-2">
+                        <a class="nav-link" href="{{ url('position') }}">Position</a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a class="nav-link" href="{{ url('salary') }}">Salary</a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a class="nav-link" href="{{ url('user') }}">User</a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a class="nav-link" href="{{ url('report') }}">Report</a>
+                    </li>
+                @endif
             </ul>
             </div>
         </div>
@@ -29,10 +31,13 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Hello <span>Admin !</span>
+                    Hello <span>{{ auth()->user()->name }} !</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <form method="POST" action="{{ url('logout') }}">
+                        @csrf
+                        <button type="submit" class="dropdown-item">Logout</button>
+                      </form>
                 </div>
                 </li>
             </ul>
