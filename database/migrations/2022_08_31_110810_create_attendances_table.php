@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->dateTime('check_in')->default(now());
-            $table->dateTime('check_out')->default(null);
+            $table->dateTime('check_out')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });

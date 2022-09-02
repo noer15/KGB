@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -14,7 +15,7 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +36,18 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $absen = Attendance::whereDate('check_in', now())->where('user_id',1)->first();
+        if(!$absen) {
+            Attendance::create([
+                'user_id' => 1,
+                'check_in' => now()
+            ]);
+        } else {
+            $absen->check_out = now();
+            $absen->update();
+        }
+        return redirect('/');
+
     }
 
     /**

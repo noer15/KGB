@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('position_id');
+            $table->unsignedBigInteger('position_id')->nullable();
             $table->string('name');
             $table->text('address');
             $table->string('phone');
@@ -25,8 +25,6 @@ return new class extends Migration
             $table->enum('level', ['admin','user']);
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('position_id')->references('id')->on('positions')->cascadeOnDelete();
         });
     }
 
