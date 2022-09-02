@@ -73,7 +73,7 @@
                         @foreach ($positions as $key => $position)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>{{ $position->salary->salary }}</td>
+                            <td>Rp. {{ number_format($position->salary->salary,0,'.','.') }}</td>
                             <td>{{ $position->name }}</td>
                             <td>
                                 <button data-id="{{ $position->id }}" data-salary="{{$position->salary->id}}" data-name="{{ $position->name }}" type="button"

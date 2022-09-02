@@ -27,6 +27,6 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/post', [AuthController::class, 'login'])->name('login.post');
 
 Route::resource('/position', PositionController::class);
-Route::resource('/criteria', CriteriaController::class)->middleware('admin');
-Route::resource('/salary', SalaryController::class)->middleware('admin');
-Route::resource('/attendance', AttendanceController::class)->middleware('admin');
+Route::resource('/criteria', CriteriaController::class);
+Route::resource('/salary', SalaryController::class);
+Route::resource('/attendance', AttendanceController::class);
