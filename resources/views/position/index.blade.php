@@ -28,7 +28,6 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Gaji</label>
                                         <select name="salary_id" id="" class="form-control">
-                                            <option value="0">--Pilih Gaji--</option>
                                             @foreach (App\Models\Salary::all() as $item)
                                                 <option value="{{ $item->id }}">{{ $item->salary }}</option>
                                             @endforeach
@@ -109,7 +108,6 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Gaji</label>
                                 <select name="salary_id" id="salary_edit" class="form-control">
-                                    <option value="0">--Pilih Gaji--</option>
                                     @foreach (App\Models\Salary::all() as $item)
                                         <option value="{{ $item->id }}">{{ $item->salary }}</option>
                                     @endforeach
