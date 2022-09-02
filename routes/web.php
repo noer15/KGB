@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\CriteriaController;
 use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\SalaryController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Guest\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,4 @@ Route::resource('/position', PositionController::class);
 Route::resource('/criteria', CriteriaController::class);
 Route::resource('/salary', SalaryController::class);
 Route::resource('/attendance', AttendanceController::class);
+Route::resource('/user', UserController::class);
