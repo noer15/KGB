@@ -64,7 +64,12 @@ class SalaryController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $salary = Salary::findOrFail($id);
+            return ['status' => true, 'kode' => 1, 'data' => $salary, 'pesan' => 'Data Ditemukan'];
+        } catch (\Exception $e) {
+            return ['status' => false, 'kode' => 2, 'pesan' => 'Data Tidak Ditemukan'];
+        }
     }
 
     /**
@@ -76,17 +81,30 @@ class SalaryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $positions = Salary::find($id);
+        $data = $request->all();
+        try {
+            $positions->update($data);
+            return back();
+        } catch (\Exception $e) {
+            return back();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function destroy($id)
     {
-        //
+        $position = Salary::find($id);
+        try {
+            $position->delete();
+            return back();
+        } catch (\Exception $e) {
+            return back();
+        }
     }
 }

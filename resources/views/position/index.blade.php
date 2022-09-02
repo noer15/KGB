@@ -4,7 +4,7 @@
         <div class="d-flex justify-content-between">
             <div>
                 <h3>Position</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, natus.</p>
+                <p>Data Jabatan</p>
             </div>
         </div>
         <div class="grey-bg my-2">
