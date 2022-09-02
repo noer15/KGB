@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Error;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::with('position')->get();
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -35,7 +38,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $request->password = bcrypt($request->password);
+            User::create($request->all());
+            return back(); 
+        } catch (\Exception $e) {
+            new Error($e);
+        }
     }
 
     /**
@@ -69,7 +78,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $data = $request->all();
+        $data['password'] = $request->password ? bcrypt($request->password) : $user->password;
+
+        try {
+            $user->update($data);
+            return back();
+        } catch (\Exception $e) {
+            return back();
+        }
     }
 
     /**
@@ -80,6 +98,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        try {
+            $user->delete();
+            return back();
+        } catch (\Exception $e) {
+            return back();
+        }
     }
 }
