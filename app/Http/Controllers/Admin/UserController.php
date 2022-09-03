@@ -39,8 +39,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
-            $request->password = bcrypt($request->password);
-            User::create($request->all());
+            $data = $request->all();
+            $data['password'] = bcrypt($request->password);
+            User::create($data);
+
             return back(); 
         } catch (\Exception $e) {
             new Error($e);

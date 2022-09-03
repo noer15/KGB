@@ -48,7 +48,7 @@
                 <table id="example" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="1">No</th>
                             <th>Gaji</th>
                             <th>Aksi</th>
                         </tr>

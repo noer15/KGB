@@ -15,18 +15,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('position_id');
+            $table->unsignedBigInteger('position_id')->nullable();
             $table->string('name');
             $table->text('address');
             $table->string('phone');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('level', ['admin','user']);
+            $table->tinyInteger('access_id')->default(1);
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('position_id')->references('id')->on('positions')->cascadeOnDelete();
         });
     }
 

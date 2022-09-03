@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CriteriaController;
 use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\SalaryController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Guest\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,15 +21,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('/home');
-})->middleware('admin');
-
-Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/post', [AuthController::class, 'login'])->name('login.post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('login.logout')->middleware('admin');
 
-Route::resource('/position', PositionController::class);
-Route::resource('/criteria', CriteriaController::class);
-Route::resource('/salary', SalaryController::class);
-Route::resource('/attendance', AttendanceController::class);
-Route::resource('/user', UserController::class);
+Route::resource('/position', PositionController::class)->middleware('admin');
+Route::resource('/criteria', CriteriaController::class)->middleware('admin');
+Route::resource('/salary', SalaryController::class)->middleware('admin');
+Route::resource('/absensi', App\Http\Controllers\User\AttendanceController::class)->middleware('admin');
+Route::resource('/user', UserController::class)->middleware('admin');
+
+Route::get('/', [DashboardController::class,'index']);
+Route::get('/downloadPdf', [DashboardController::class,'downloadPdf']);
