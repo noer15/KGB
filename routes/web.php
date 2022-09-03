@@ -31,5 +31,5 @@ Route::resource('/salary', SalaryController::class)->middleware('admin');
 Route::resource('/absensi', App\Http\Controllers\User\AttendanceController::class)->middleware('admin');
 Route::resource('/user', UserController::class)->middleware('admin');
 
-Route::get('/', [DashboardController::class,'index']);
+Route::get('/', [DashboardController::class,'index'])->middleware(['auth','admin']);
 Route::get('/downloadPdf', [DashboardController::class,'downloadPdf']);
