@@ -18,8 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->dateTime('check_in')->default(now());
             $table->dateTime('check_out')->nullable();
-
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
