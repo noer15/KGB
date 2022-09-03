@@ -22,7 +22,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($validator, true)) {
+        if (Auth::attempt($validator)) {
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
@@ -30,35 +30,9 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
-    public function register(Request $request)
-    {
-        $validator = $request->validate([
-            'name' => 'required|string',
-            'address' => 'required|string',
-            'phone' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required',
-            'level' => 'required'
-        ]);
-
-        if ($validator) {
-            User::create([
-                'position_id' => $request->position_id,
-                'name' => $request->name,
-                'address' => $request->address,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'level' => $request->level
-            ]);
-        }
-
-        return 'register page';
-    }
-
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
-        return route('login');
+        return redirect(route('login'));
     }
 }

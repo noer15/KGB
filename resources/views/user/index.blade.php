@@ -89,12 +89,13 @@
                 <table id="example" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="1">No</th>
                             <th>Jabatan</th>
                             <th>Nama</th>
                             <th>Nomor HP</th>
                             <th>Alamat</th>
                             <th>Email</th>
+                            <th>Akses</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -102,20 +103,21 @@
                         @foreach ($users as $key => $user)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>{{ $user->position->name }}</td>
+                            <td>{{ $user->position?->name }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->address }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->access_id == 0 ? 'Admin' : 'User' }}</td>
                             <td>
                                 <button 
                                     data-id="{{ $user->id }}" 
-                                    data-position="{{$user->position->id}}" 
+                                    data-position="{{$user->position?->id}}" 
                                     data-name="{{ $user->name }}" 
                                     data-email="{{ $user->email }}" 
                                     data-address="{{$user->address}}"
                                     data-phone="{{$user->phone}}"
-                                    data-level="{{$user->level}}"
+                                    data-level="{{$user->access_id}}"
                                     type="button" class="btn btn-primary btn-sm btn-edit" data-toggle="modal" data-target="#editModal">
                                     Edit
                                 </button>
@@ -181,8 +183,8 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Hak Akses</label>
                                 <select required name="level" id="level_edit" class="form-control">
-                                    <option value="user">User</option>
-                                    <option value="admin">Admin</option>
+                                    <option value="1">User</option>
+                                    <option value="0">Admin</option>
                                 </select>
                             </div>
                             <div class="my-4">

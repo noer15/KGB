@@ -10,9 +10,10 @@ class DashboardController extends Controller
    
     public function index()
     {
-        if(auth()->user()->level == 'admin') {
-            return view('/home');
+        if(auth()->user()->access_id == 0) {
+            return view('home');
         } else {
+            
             $absen = Attendance::whereDate('check_in', now())->where('user_id', auth()->user()->id)->first();
             return view('absensi', compact('absen'));
         }

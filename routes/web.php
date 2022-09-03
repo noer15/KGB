@@ -21,15 +21,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/post', [AuthController::class, 'login'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'login'])->name('login.logout')->middleware('admin');
+Route::get('/logout', [AuthController::class, 'logout'])->name('login.logout')->middleware('admin');
 
 Route::resource('/position', PositionController::class)->middleware('admin');
 Route::resource('/criteria', CriteriaController::class)->middleware('admin');
 Route::resource('/salary', SalaryController::class)->middleware('admin');
 Route::resource('/absensi', App\Http\Controllers\User\AttendanceController::class)->middleware('admin');
 Route::resource('/user', UserController::class)->middleware('admin');
-Route::get('/', [DashboardController::class,'index'])->middleware('admin');
 
+Route::get('/', [DashboardController::class,'index']);
 Route::get('/downloadPdf', [DashboardController::class,'downloadPdf']);

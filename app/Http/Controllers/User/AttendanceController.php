@@ -36,18 +36,18 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        $absen = Attendance::whereDate('check_in', now())->where('user_id',1)->first();
+        $absen = Attendance::whereDate('check_in', now())->where('user_id',auth()->user()->id)->first();
         if(!$absen) {
             Attendance::create([
-                'user_id' => 1,
+                'user_id' => auth()->user()->id,
                 'check_in' => now()
             ]);
         } else {
             $absen->check_out = now();
             $absen->update();
         }
-        return redirect('/');
 
+        return redirect('/');
     }
 
     /**

@@ -8,20 +8,20 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item px-2 active">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/">Beranda</a>
                 </li>
-                @if (auth()->user()->level == 'admin')
+                @if (auth()->user()->access_id == 0)
                     <li class="nav-item px-2">
-                        <a class="nav-link" href="{{ url('position') }}">Position</a>
+                        <a class="nav-link" href="{{ url('position') }}">Jabatan</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" href="{{ url('salary') }}">Salary</a>
+                        <a class="nav-link" href="{{ url('salary') }}">Gaji</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" href="{{ url('user') }}">User</a>
+                        <a class="nav-link" href="{{ url('user') }}">Pegawai</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" href="{{ url('report') }}">Report</a>
+                        <a class="nav-link" href="{{ url('report') }}">Laporan</a>
                     </li>
                 @endif
             </ul>
@@ -31,13 +31,14 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Hello <span>{{ auth()->user()->name }} !</span>
+                    Hai, <span>{{ auth()->user()->name }} !</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <form method="POST" action="{{ url('logout') }}">
-                        @csrf
-                        <button type="submit" class="dropdown-item">Logout</button>
-                      </form>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('login.logout')}}">Keluar</a>
+                        </li>
+                    </ul>
                 </div>
                 </li>
             </ul>

@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'phone' => '081223334444',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
-            'level' => 'admin'
+            'access_id' => 0
         ]);
 
         User::create([
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             'phone' => '081223334444',
             'email' => 'dayat@gmail.com',
             'password' => bcrypt('dayat'),
-            'level' => 'user'
+            'access_id' => 1
         ]);
     }
 }
